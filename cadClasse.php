@@ -1,7 +1,7 @@
 <?php 
-//session_start();
+session_start();
 require ('config.php');
-//require('verifica.php');
+require('verifica.php');
 
 $idUser = $_SESSION["idUserAtivo"];
 @$id_classe = $_REQUEST["id_classe"];

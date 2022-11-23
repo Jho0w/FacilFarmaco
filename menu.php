@@ -1,7 +1,6 @@
 <link rel="stylesheet" type="text/css" href="styles/style-menu.css" media="screen">
 <?php
 if(!isset($_SESSION)) session_start();
-require('verifica.php');
 
 
 if (@$_SESSION["usuarioNivel"] == "2"){
@@ -20,7 +19,7 @@ if (@$_SESSION["usuarioNivel"] == "2"){
 	</header>
 <?php
 
-} if((@$_SESSION["usuarioNivel"] == "1")){
+} if((@$_SESSION["usuarioNivel"] == "1" )){
 
 ?>
 
@@ -42,5 +41,19 @@ if (@$_SESSION["usuarioNivel"] == "2"){
 	</header>
 
 	<?php
+} else{
+	?>
+	<header>
+		<a class="nome">Olá!<strong></strong></a>
+
+		<nav id="menu">
+			<ul>
+				<li><a href="index.php">Início</a></li>
+				<li><a href="interacao.php">Interação</a></li>
+				<li class="sair"><a href="login.php">Login</a></li>
+			</ul>
+		</nav>
+	</header>
+<?php
 }
 ?>

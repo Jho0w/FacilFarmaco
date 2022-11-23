@@ -2,12 +2,11 @@
 session_start();
 include ('config.php');
 include ('funcoes.php');
-//require('verifica.php');
+require('verifica.php');
 
-/*if ($_SESSION["usuarioNivel"] == "0") {
+if ($_SESSION["usuarioNivel"] == "0") {
 	echo "<script>alert('Você não é Administrador!');top.location.href='menu.php';</script>"; 
 }
-*/
 
 $idUser = @$_REQUEST['idUser'];
 @$idCategoria = $_REQUEST['idCategoria'];
@@ -54,9 +53,6 @@ if(@$_REQUEST['botaoExcel'] == "Exportar"){
 				<tbody>
 					
 					<?php
-
-
-
 					@$interacoes = $_POST['id_inter'];
 
 					$query = "SELECT * FROM medicamento INNER JOIN classe ON medicamento.id_classe = classe.id_classe WHERE id_med > 0 AND medicamento.ativo = 1";
@@ -72,7 +68,9 @@ if(@$_REQUEST['botaoExcel'] == "Exportar"){
 						<th><?php echo $coluna['nome_med'];?> </th>
 						<th><?php echo $coluna['nome_classe'];?> </th>
 						<th>
-					<a href="cadMedicamento.php?botao=Editar&id_med=<?php echo $coluna['id_med']; ?>" >Editar</a>
+					<a href="cadMedicamento.php?id_med=<?php echo $coluna['id_med']; ?>" >
+						<img src="images/icone-editar.png" height="18px" width="18px">
+					</a>
 					</th>
 					</tr>
 

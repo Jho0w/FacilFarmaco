@@ -86,9 +86,9 @@ if (@$_REQUEST['botao'] == "Gravar")
 	<main>
 
 	<?php
-//if (!isset($_SESSION["idUserAtivo"]) || isset($_SESSION["login"]) ){ 
+if (!isset($_SESSION["idUserAtivo"]) || isset($_SESSION["login"]) ){ 
     include('menu.php');	
-//} 
+} 
 ?>
 		<div>
 			<h1 id="titulo">Faça seu cadastro</h1>
@@ -133,25 +133,25 @@ if (@$_REQUEST['botao'] == "Gravar")
 			<!-- fim da função para saber senhas iguais -->
 
 			
-			<div class="campo">
-				<label><strong>Nível do Usuário</strong></label>
-				<label>
-					<input type="radio" name="admin" value="1" <?php echo (@$_POST['admin'] == "1" ? " checked" : "" );?> > Administrador
-				</label>
-				<label>
-					<input type="radio" name="admin" value="2" <?php echo (@$_POST['admin'] == "2" ? " checked" : "" );?> > Usuário
-				</label>
-			</div>
+			<?php if (@$_SESSION["usuarioNivel"] == "1"){ ?>
+				<div class="campo">
+					<label><strong>Nível do Usuário</strong></label>
+					<label>
+						<input type="radio" name="admin" value="1" <?php echo (@$_POST['admin'] == "1" ? " checked" : "" );?> > Administrador
+					</label>
+					<label>
+						<input type="radio" name="admin" value="2" <?php echo (@$_POST['admin'] == "2" ? " checked" : "" );?> > Usuário
+					</label>
+				</div>
+			<?php } ?>
 			
 			<div class="botao">
 			<button class="botao1" type="submit" name="botao" value="Gravar">Concluido</button>
-			<!-- VOU ADICIONAR DEPOIS ESSA FUNÇÃO
-			< ?php if (@$_SESSION["usuarioNivel"] == "1"){ ?>
+			<?php if (@$_SESSION["usuarioNivel"] == "1"){ ?>
 				<button class="botao2" type="image" name="botao" value="Gravar"
 				onclick="return confirm('Tem certeza que deseja deletar este registro?')">
-				Excluir</button></button>
-			< ?php } ?>
-			-->
+				<img src="images/icone-excluir.png" height="20px" width="20px"></button></button>
+			<?php } ?>
 			<input type="hidden" name="idUser" value="<?php echo @$_POST['idUser'] ?>" />
 			</div>
 		</form>

@@ -1,27 +1,29 @@
 <?php 
-//session_start();
+session_start();
 require ('config.php');
-//require('verifica.php');
+require('verifica.php');
 
 $idUser = $_SESSION["idUserAtivo"];
-@$id_inter = $_REQUEST["id_inter"];
+@$id_med = $_REQUEST["id_med"];
 
-/*if (@$_REQUEST['botao'] == "Excluir") {
+if (@$_REQUEST['botao'] == "Excluir") {
 
 		$query_excluir = "
-			DELETE FROM interacoes WHERE id_inter=$id_inter
+		UPDATE medicamento SET 
+		ativo = '2' WHERE id_med=$id_med
 		";
 		$result_excluir = mysqli_query($con, $query_excluir);
 		
 		if ($result_excluir) echo "<h2> Registro excluido com sucesso!!!</h2>";
 		else echo "<h2> Nao consegui excluir!!!</h2>";
 		#Ele exclue só se tiver com todos os campos na tabela preenchidos
-}*/
+}
 
-if (@$_REQUEST['id_inter'] and @!$_REQUEST['botao'])
+if (@$_REQUEST['id_med'] and @!$_REQUEST['botao'])
 {
+	echo "entrei";
 	$query = "
-		SELECT * FROM medicamentos WHERE id_med=$id_med
+		SELECT * FROM medicamento WHERE id_med=$id_med
 	";
 	$result = mysqli_query($con, $query);
 	$row = mysqli_fetch_assoc($result);
@@ -29,18 +31,11 @@ if (@$_REQUEST['id_inter'] and @!$_REQUEST['botao'])
 	{
 		$_POST[$key] = $value;
 	}
-
 	
 }
 
 if (@$_REQUEST['botao'] == "Gravar") 
 {
-	if ($_SESSION["usuarioNivel"] == "1"){ 
-	$anuncioAtivo = $_POST['anuncioAtivo'];
-	}
-	else{ 
-	$anuncioAtivo = 2; 
-	}
 	
 	if (@!$_REQUEST['id_med'])
 	{
@@ -52,12 +47,10 @@ if (@$_REQUEST['botao'] == "Gravar")
 		
 	} else 	
 	{
-		$insere = "UPDATE interacoes SET 
-					composicao = '{$_POST['composicao']}'
-					, interagente = '{$_POST['interagente']}'
+		$insere = "UPDATE medicamento SET 
+					nome_med = '{$_POST['nome_med']}'
 					, id_classe = '{$_POST['id_classe']}'
-					, interacao = '{$_POST['interacao']}'
-					WHERE id_inter = '{$_REQUEST['id_inter']}'
+					WHERE id_med = '{$_REQUEST['id_med']}'
 				";
 		$result_update = mysqli_query($con, $insere);
 
@@ -82,9 +75,7 @@ if (@$_REQUEST['botao'] == "Gravar")
 <body>
 
 <?php
-//if (!isset($_SESSION["idUserAtivo"]) || isset($_SESSION["login"]) ){ 
-    include('menu.php');	
-//} 
+    include('menu.php');
 ?>
 	<main>
 		<div>
@@ -94,7 +85,7 @@ if (@$_REQUEST['botao'] == "Gravar")
 		<form enctype="multipart/form-data" action="cadMedicamento.php?botao=gravar" method="post" name="anuncio">
 		<div>
 			<label><strong>Código</strong></label>
-			<label><?php echo @$_POST['id_inter']; ?></label>
+			<label><?php echo @$_POST['id_med']; ?></label>
 		</div>
 		<fieldset class="grupo">
 			<div class="campo">
@@ -107,7 +98,7 @@ if (@$_REQUEST['botao'] == "Gravar")
 				<?php
 				
 				$query = "
-					SELECT id_classe, nome
+					SELECT id_classe, nome_classe
 					FROM classe
 				";
 				$result = mysqli_query($con, $query);
@@ -122,7 +113,7 @@ if (@$_REQUEST['botao'] == "Gravar")
 			?>
 			
 			<option value="<?php echo $row['id_classe']; ?>" 
-			<?php echo $row['id_classe'] == @$_POST['id_classe'] ? "selected" : "" ?>><?php echo @$row['nome'];?></option>
+			<?php echo $row['id_classe'] == @$_POST['id_classe'] ? "selected" : "" ?>><?php echo @$row['nome_classe'];?></option>
 
 			</option>
 			
