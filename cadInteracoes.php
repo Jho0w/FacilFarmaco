@@ -1,7 +1,7 @@
 <?php 
-//session_start();
+if(!isset($_SESSION)) session_start();
 require ('config.php');
-//require('verifica.php');
+require('verifica.php');
 
 $idUser = $_SESSION["idUserAtivo"];
 @$id_inter = $_REQUEST["id_inter"];
@@ -9,7 +9,7 @@ $idUser = $_SESSION["idUserAtivo"];
 if (@$_REQUEST['botao'] == "Excluir") {
 
 		$query_excluir = "
-			DELETE FROM interacoes WHERE id_inter=$id_inter
+			DELETE FROM interacao WHERE id_inter=$id_inter
 		";
 		$result_excluir = mysqli_query($con, $query_excluir);
 		
@@ -21,7 +21,7 @@ if (@$_REQUEST['botao'] == "Excluir") {
 if (@$_REQUEST['id_inter'] and @!$_REQUEST['botao'])
 {
 	$query = "
-		SELECT * FROM interacoes WHERE id_inter=$id_inter
+		SELECT * FROM interacao WHERE id_inter=$id_inter
 	";
 	$result = mysqli_query($con, $query);
 	$row = mysqli_fetch_assoc($result);
@@ -44,7 +44,7 @@ if (@$_REQUEST['botao'] == "Gravar")
 	
 	if (@!$_REQUEST['id_inter'])
 	{
-		$insere = "INSERT INTO interacoes (composicao, interagente, id_classe, interacao) VALUES ('{$_POST['composicao']}', '{$_POST['interagente']}', '{$_POST['id_classe']}', '{$_POST['interacao']}')";
+		$insere = "INSERT INTO interacao (composicao, interagente, id_classe, interacao) VALUES ('{$_POST['composicao']}', '{$_POST['interagente']}', '{$_POST['id_classe']}', '{$_POST['interacao']}')";
 		$result_insere = mysqli_query($con, $insere);
 		
 		if ($result_insere) echo "<h2> Registro inserido com sucesso!!!</h2>";

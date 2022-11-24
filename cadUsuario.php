@@ -1,5 +1,5 @@
 <?php
-session_start(); 
+if(!isset($_SESSION)) session_start();
 require ('config.php');
 
 $idUser = @$_REQUEST['id_user'];
@@ -76,7 +76,7 @@ if (@$_REQUEST['botao'] == "Gravar")
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="styles/style-cadUser.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="styles/style-cadUsuario.css" media="screen">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 	<title>Criar conta</title>
@@ -96,10 +96,10 @@ if (!isset($_SESSION["idUserAtivo"]) || isset($_SESSION["login"]) ){
 		
 		<!-- começo do formulário pra mandar os dados -->
 		
-		<form enctype="multipart/form-data" action="cadUser.php?botao=gravar" method="post" name="user">	
+		<form enctype="multipart/form-data" action="cadUsuario.php?botao=gravar" method="post" name="user">	
 			<label for="id"><strong>Código</strong></label>
 			<div>
-				<?php echo @$_POST['idUser']; ?>
+				<?php echo @$_POST['id_user']; ?>
 			</div>
 			<fieldset class="grupo">
 				<div class="campo">

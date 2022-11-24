@@ -25,8 +25,8 @@ if(@$_REQUEST['botaoExcel'] == "Exportar"){
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="styles/style-relatorioMedicamento.css" media="screen">
-	<title>Relatório Medicamento</title>
+	<link rel="stylesheet" type="text/css" href="styles/style-relatorioClasse.css" media="screen">
+	<title>Relatório Interações</title>
 </head>
 <body>
 	<?php include('menu.php'); ?>
@@ -34,7 +34,7 @@ if(@$_REQUEST['botaoExcel'] == "Exportar"){
 	<main>
 
 			<div>
-				<h1 id="meio">Todos os medicamentos!</h1>
+				<h1 id="meio">Todos as Interações!</h1>
 			</div>
 
 
@@ -44,8 +44,9 @@ if(@$_REQUEST['botaoExcel'] == "Exportar"){
 				<thead>
 					<tr>
 						<th>Código</th>
-						<th>Nome</th>
-						<th>Classe</th>
+						<th>Medicamento 1</th>
+						<th>Medicamento 2</th>
+						<th>Interação</th>
 						<th>&nbsp;</th>
 					</tr>
 				</thead>
@@ -54,7 +55,8 @@ if(@$_REQUEST['botaoExcel'] == "Exportar"){
 					<?php
 					@$interacoes = $_POST['id_inter'];
 
-					$query = "SELECT * FROM medicamento INNER JOIN classe ON medicamento.id_classe = classe.id_classe WHERE id_med > 0 AND medicamento.ativo = 1";
+					$query = "SELECT * FROM interacao 
+                    WHERE id_inter > 0 AND ativo = 1";
 					
 					$result = mysqli_query($con, $query);
 
@@ -63,11 +65,12 @@ if(@$_REQUEST['botaoExcel'] == "Exportar"){
                         
 					?>
 					<tr>
-						<th><?php echo $coluna['id_med'];?> </th>
-						<th><?php echo $coluna['nome_med'];?> </th>
-						<th><?php echo $coluna['nome_classe'];?> </th>
+						<th><?php echo $coluna['id_inter'];?> </th>
+						<th><?php echo $coluna['id_med1'];?> </th>
+						<th><?php echo $coluna['id_med2'];?> </th>
+						<th><?php echo $coluna['interacao'];?> </th>
 						<th>
-					<a href="cadMedicamento.php?id_med=<?php echo $coluna['id_med']; ?>" >
+					<a href="cadInteracoes.php?id_inter=<?php echo $coluna['id_inter']; ?>" >
 						<img src="images/icone-editar.png" height="18px" width="18px">
 					</a>
 					</th>
@@ -86,7 +89,7 @@ if(@$_REQUEST['botaoExcel'] == "Exportar"){
 
 			<div>
 				<form action=# method=post>
-					<button id="botaoExcel" type=submit name="botaoExcel" value="Exportar">Exportar</button>
+					<button type=submit id="botaoExcel" name="botaoExcel" value="Exportar">Exportar</button>
 				</form>
 			</div>
 	</main>

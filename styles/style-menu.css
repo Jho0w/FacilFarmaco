@@ -8,48 +8,24 @@ body {
     font-size: 14px;
 }
 
-#menu ul {
-    list-style: none;
-    border: 0.5px solid rgb(59, 59, 59);
-    border-radius: 3px;
-}
-
-#menu li {
-    position: relative;
-    border-right: 0.5px solid rgb(59, 59, 59);
-}
-
-#menu li a {
-    color: #59429d; 
-    text-decoration: none; 
-    padding: 5px 10px; 
-    display: block;
-}
-
-
-#menu li a:hover{
-    background:#333; 
-    color:#fff; 
-    -moz-box-shadow:0 3px 10px 0 #CCC; 
-    -webkit-box-shadow:0 3px 10px 0 #ccc; 
-    text-shadow:0px 0px 5px #fff; 
+.nome{
+    width: 15%;
 }
 
 .sair{
     background-color: #a890f0;
 }
 
-.logo {
-    margin: 10px;
-    margin-left: 30px;
-}
 
 .perfil{
     border-radius: 50%;
 }
 
-header, #menu, #menu ul{
+header, #menu{
    display: flex;
+   max-width: 90%;
+   margin-left: 30px;
+   margin-top: 20px;
 }
 
 #menu{
@@ -59,7 +35,48 @@ header, #menu, #menu ul{
 }
 
 .nome{
-    margin: 20px;
-    margin-left: 5px;
+    margin: 10px;
     font-size: 25px;
+}
+
+.menuu{
+    list-style:none;
+    float:left;
+}
+
+.menuu li{
+    position:relative;
+    float:left;
+    border-right:1px solid #c0c0c0;
+    border-left:1px solid #c0c0c0;
+    border-radius: 5px;
+}
+
+.menuu li a{
+    color: #59429d; 
+    text-decoration: none;
+    padding:5px 10px;
+    display:block;
+}
+
+.menuu li a:hover{
+-moz-box-shadow:0 3px 10px 0 #CCC;
+-webkit-box-shadow:0 3px 10px 0 #ccc;
+text-shadow:0px 0px 5px #fff;
+}
+
+.menuu li  ul{
+    position:absolute;
+    top:25px;
+    justify-content: center;
+    display:none;
+    border-radius: 5px;
+}
+
+.menuu li:hover ul, .menuu li.over ul{display:block;}
+
+.menuu li ul li{
+    border:1px solid #c0c0c0;
+    display:block;
+    border-radius: 5px;
 }

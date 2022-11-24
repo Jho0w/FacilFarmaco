@@ -45,7 +45,8 @@ if(@$_REQUEST['botaoExcel'] == "Exportar"){
 					<tr>
 						<th>Código</th>
 						<th>Nome</th>
-						<th>Classe</th>
+						<th>Login</th>
+						<th>Perfil</th>
 						<th>&nbsp;</th>
 					</tr>
 				</thead>
@@ -54,20 +55,26 @@ if(@$_REQUEST['botaoExcel'] == "Exportar"){
 					<?php
 					@$interacoes = $_POST['id_inter'];
 
-					$query = "SELECT * FROM medicamento INNER JOIN classe ON medicamento.id_classe = classe.id_classe WHERE id_med > 0 AND medicamento.ativo = 1";
+					$query = "SELECT * FROM usuario WHERE id_user > 0 AND ativo = 1";
 					
 					$result = mysqli_query($con, $query);
 
 					while ($coluna=mysqli_fetch_array($result)) 
 					{
+						if($coluna['perfil'] == 1){
+							$admin = 'Administrador';
+						} else{
+							$admin = 'Usuário';
+						}
                         
 					?>
 					<tr>
-						<th><?php echo $coluna['id_med'];?> </th>
-						<th><?php echo $coluna['nome_med'];?> </th>
-						<th><?php echo $coluna['nome_classe'];?> </th>
+						<th><?php echo $coluna['id_user'];?> </th>
+						<th><?php echo $coluna['nome'];?> </th>
+						<th><?php echo $coluna['login'];?> </th>
+						<th><?php echo $admin;?> </th>
 						<th>
-					<a href="cadMedicamento.php?id_med=<?php echo $coluna['id_med']; ?>" >
+					<a href="cadUsuario.php?id_user=<?php echo $coluna['id_user']; ?>" >
 						<img src="images/icone-editar.png" height="18px" width="18px">
 					</a>
 					</th>

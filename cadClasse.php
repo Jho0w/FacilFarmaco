@@ -9,7 +9,8 @@ $idUser = $_SESSION["idUserAtivo"];
 if (@$_REQUEST['botao'] == "Excluir") {
 
 		$query_excluir = "
-			DELETE FROM classe WHERE id_classe=$id_classe
+			UPDATE classe SET 
+			ativo = '2' WHERE id_classe=$id_classe
 		";
 		$result_excluir = mysqli_query($con, $query_excluir);
 		
@@ -21,7 +22,7 @@ if (@$_REQUEST['botao'] == "Excluir") {
 if (@$_REQUEST['id_classe'] and @!$_REQUEST['botao'])
 {
 	$query = "
-		SELECT * FROM classe WHERE id_classe=$id_classe
+		SELECT * FROM classe WHERE id_classe=$id_classe AND ativo=1
 	";
 	$result = mysqli_query($con, $query);
 	$row = mysqli_fetch_assoc($result);
@@ -35,16 +36,10 @@ if (@$_REQUEST['id_classe'] and @!$_REQUEST['botao'])
 
 if (@$_REQUEST['botao'] == "Gravar") 
 {
-	if ($_SESSION["usuarioNivel"] == "1"){ 
-	$anuncioAtivo = $_POST['anuncioAtivo'];
-	}
-	else{ 
-	$anuncioAtivo = 2; 
-	}
 	
 	if (@!$_REQUEST['id_classe'])
 	{
-		$insere = "INSERT INTO classe (nome, funcao, quando, como) VALUES ('{$_POST['nome']}', '{$_POST['funcao']}', '{$_POST['quando']}', '{$_POST['como']}')";
+		$insere = "INSERT INTO classe (nome, funcao, quando, como, ativo) VALUES ('{$_POST['nome']}', '{$_POST['funcao']}', '{$_POST['quando']}', '{$_POST['como']}', '1')";
 		$result_insere = mysqli_query($con, $insere);
 		
 		if ($result_insere) echo "<h2> Registro inserido com sucesso!!!</h2>";
@@ -53,7 +48,7 @@ if (@$_REQUEST['botao'] == "Gravar")
 	} else 	
 	{
 		$insere = "UPDATE classe SET 
-					nome = '{$_POST['nome']}'
+					nome = '{$_POST['nome_classe']}'
 					, funcao = '{$_POST['funcao']}'
 					, quando = '{$_POST['quando']}'
 					, como = '{$_POST['como']}'
@@ -98,7 +93,7 @@ if (@$_REQUEST['botao'] == "Gravar")
 		<fieldset class="grupo">
 			<div class="campo">
 				<label for="nome"><strong>Nome</strong></label>
-				<input class="campo-nome" type="text" name="nome" id="nome" required value=<?php echo @$_POST['nome'];?> >
+				<input class="campo-nome" type="text" name="nome" id="nome" required value=<?php echo @$_POST['nome_classe'];?> >
 			</div>
 			<div class="campo">
 				<label for="funcao"><strong>Função</strong></label>
@@ -117,7 +112,7 @@ if (@$_REQUEST['botao'] == "Gravar")
 			<button class="botao1" type="submit" name="botao" value="Gravar">Concluido</button>
 			<?php if (@$_SESSION["usuarioNivel"] == "1"){ ?>
 			<button class="botao2" type="image" name="botao" value="Excluir" onclick="return confirm('Tem certeza que deseja deletar este registro?')">
-				<img src="imagens/icone-excluir.png" height="20px" width="20px"></button>
+				<img src="images/icone-excluir.png" height="20px" width="20px"></button>
 		
 			<?php } ?>
 			
