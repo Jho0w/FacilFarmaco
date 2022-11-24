@@ -44,7 +44,7 @@ if (@$_REQUEST['botao'] == "Gravar")
 	
 	if (@!$_REQUEST['id_inter'])
 	{
-		$insere = "INSERT INTO interacao (composicao, interagente, id_classe, interacao) VALUES ('{$_POST['composicao']}', '{$_POST['interagente']}', '{$_POST['id_classe']}', '{$_POST['interacao']}')";
+		$insere = "INSERT INTO interacao (id_med1, id_med2, interacao, ativo) VALUES ('{$_POST['id_med1']}', '{$_POST['id_med2']}', '{$_POST['interacao']}', '1')";
 		$result_insere = mysqli_query($con, $insere);
 		
 		if ($result_insere) echo "<h2> Registro inserido com sucesso!!!</h2>";
@@ -52,10 +52,9 @@ if (@$_REQUEST['botao'] == "Gravar")
 		
 	} else 	
 	{
-		$insere = "UPDATE interacoes SET 
-					composicao = '{$_POST['composicao']}'
-					, interagente = '{$_POST['interagente']}'
-					, id_classe = '{$_POST['id_classe']}'
+		$insere = "UPDATE interacao SET 
+					id_med1 = '{$_POST['id_med1']}'
+					, id_med2 = '{$_POST['id_med2']}'
 					, interacao = '{$_POST['interacao']}'
 					WHERE id_inter = '{$_REQUEST['id_inter']}'
 				";
@@ -82,9 +81,7 @@ if (@$_REQUEST['botao'] == "Gravar")
 <body>
 
 <?php
-//if (!isset($_SESSION["idUserAtivo"]) || isset($_SESSION["login"]) ){ 
-    include('menu.php');	
-//} 
+    include('menu.php');
 ?>
 	<main>
 		<div>

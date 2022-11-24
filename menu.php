@@ -51,7 +51,7 @@ if (@$_SESSION["usuarioNivel"] == "2"){
 					<li><a href="#">Usuários</a>
 						<ul>
 							<li><a href="relatorioUsuario.php">Todos os Usuários</a></li>
-							<li><a href="cadUser.php">Cad Cliente</a></li>
+							<li><a href="cadUsuario.php">Cad Cliente</a></li>
 						</ul>
 					</li>
 				<li class="sair"><a href="logout.php">Sair</a></li>

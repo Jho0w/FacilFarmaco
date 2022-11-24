@@ -30,7 +30,7 @@
 		<br>
 		<div class="link">
 			<a id="link-1" href="index.php">Entrar sem login</a>
-			<a id="link-2" href="cadUser.php">Criar Conta</a>
+			<a id="link-2" href="cadUsuario.php">Criar Conta</a>
 		</div>
 	</form>
 </div>

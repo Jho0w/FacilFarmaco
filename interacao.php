@@ -15,8 +15,8 @@
 			eval("document.location.href = '" + goToLocation + "&id_med=" + selObj.options[selObj.selectedIndex].value + "'");
 		}
 
-		function goToUrl2(selObj1, goToLocation, selObj2) {
-			eval("document.location.href = '" + goToLocation + "&id_med1=" + selObj2.options[selObj2.selectedIndex].value + "'"+ "&id_med2=" + selObj1.options[selObj1.selectedIndex].value + "'");
+		function goToUrl2(selObj1, selObj2, goToLocation) {
+			eval("document.location.href = '" + goToLocation + "&id_med1=" + selObj2.options[selObj2.selectedIndex].value + "&id_med2=" + selObj1.options[selObj1.selectedIndex].value + "'");
 		}
 	</script>
 
@@ -27,9 +27,7 @@
 
 
 	<?php
-	//if (!isset($_SESSION["idUserAtivo"]) || isset($_SESSION["login"]) ){ 
 	include('menu.php');
-	//} 
 
 	//goToUrl(this,'interacao.php?pag=interacao');
 
@@ -86,7 +84,7 @@
 			<br><br>
 
 			<label for="categoria"><strong>Medicamento 2</strong></label>
-			<select name="id_med2" onChange="goToUrl2(this,'interacao.php?pag=interacao', <?php $_REQUEST['id_med'] ?>)">
+			<select name="id_med2" onChange="goToUrl2('<?php echo $_REQUEST['id_med2'] ?>','interacao.php?pag=interacao', '<?php echo $id_med1 ?>')">
 				<option value=""> ..:: selecione ::.. </option>
 				<?php
 				if (@$_REQUEST['id_med2'] == "") $medicamento2_combo = @$_POST['id_med2'];
@@ -94,7 +92,9 @@
 
 				while ($row = mysqli_fetch_assoc($result)) {
 				?>
-					<option value="<?php echo $row['id_med2']; ?>" <?php echo $row['id_med2'] == $medicamento2_combo ? "selected" : "" ?>><?php echo $row['nome_med']; ?></option>
+					<option value="<?php echo $row['id_med2']; ?>" 
+					<?php echo $row['id_med2'] == $medicamento2_combo ? "selected" : "" ?>>
+					<?php echo $row['nome_med']; ?></option>
 				<?php
 				@$id_med2 = $_REQUEST['id_med2'];
 				}

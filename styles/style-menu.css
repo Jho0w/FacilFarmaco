@@ -10,6 +10,9 @@ body {
 
 .nome{
     width: 15%;
+    margin: 10px;
+    font-size: 15px;
+    align-items: center;
 }
 
 .sair{
@@ -34,10 +37,6 @@ header, #menu{
    align-items: center; /* alinha verticalmente */
 }
 
-.nome{
-    margin: 10px;
-    font-size: 25px;
-}
 
 .menuu{
     list-style:none;

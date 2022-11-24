@@ -13,7 +13,7 @@ $idUser = @$_REQUEST['idUser'];
 
 if(@$_REQUEST['botaoExcel'] == "Exportar"){
 	
-	exportcsv();
+	exportcsvMedicamento();
 
 }
 ?>
