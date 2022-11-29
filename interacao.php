@@ -1,4 +1,7 @@
-<?php include('config.php'); ?>
+<?php include('config.php');
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -18,6 +21,15 @@
 		function goToUrl2(selObj1, selObj2, goToLocation) {
 			eval("document.location.href = '" + goToLocation + "&id_med1=" + selObj2.options[selObj2.selectedIndex].value + "&id_med2=" + selObj1.options[selObj1.selectedIndex].value + "'");
 		}
+
+		let tabela = document.getElementById('tableMed1');
+		let linhas = tabela.querySelectorAll('tr');
+
+		linhas.forEach((linha) => {
+			linha.onclick = () => {
+				eval("document.location.href = '" + goToLocation + "&id_med=" + selObj.options[selObj.selectedIndex].value + "'");
+			}
+		});
 	</script>
 
 	<title>Interação</title>
@@ -34,139 +46,154 @@
 	?>
 	<br><br><br><br><br><br>
 	<main>
-		<div class="campo">
-			<label for="categoria"><strong>Medicamento 1</strong></label>
+		<div class="container-itens">
+			<form action="interacao.php?" method="GET">
+				<div class="campo">
+					<label for="categoria"><strong>Medicamento 1</strong></label>
 
-			<?php
+					<?php
 
-			$query = "
-			SELECT id_med, nome_med
-			FROM medicamento
-			WHERE ativo = 1
-		";
-			$result = mysqli_query($con, $query);
-			?>
-			<select name="id_med" onChange="goToUrl(this,'interacao.php?pag=interacao')">
-				<option value=""> ..:: selecione ::.. </option>
-				<?php
+					$query = "
+				SELECT id_med, nome_med
+				FROM medicamento
+				WHERE ativo = 1
+			";
+					$result = mysqli_query($con, $query);
+					?>
+					<select name="id_med" onChange="goToUrl(this,'interacao.php?pag=interacao')">
+						<option value=""> ..:: selecione ::.. </option>
+						<?php
 
-				if ($_REQUEST['id_med'] == "") $medicamento1_combo = $_GET['id_med'];
-				else $medicamento1_combo = $_REQUEST['id_med'];
+						if ($_REQUEST['id_med'] == "") $medicamento1_combo = $_GET['id_med'];
+						else $medicamento1_combo = $_REQUEST['id_med'];
 
-				while ($row = mysqli_fetch_assoc($result)) {
-				?>
-					<option value="<?php echo $row['id_med']; ?>" <?php echo $row['id_med'] == $medicamento1_combo ? "selected" : "" ?>><?php echo $row['nome_med']; ?></option>
-				<?php
-				}
-				?>
-			</select>
-
-
-			<!-- Combo 1 -->
-
-			<?php
-
-			@$id_med1 = $_GET['id_med'];
-
-			$query = "
-			SELECT *
-			FROM interacao
-			INNER JOIN medicamento ON interacao.id_med2 = medicamento.id_med
-			WHERE id_med1 = '$id_med1' AND medicamento.ativo = 1
-			ORDER BY nome_med
-		";
-
-			//echo "$query";
-			$result = mysqli_query($con, $query);
-
-			?>
-
-			<br><br>
-
-			<label for="categoria"><strong>Medicamento 2</strong></label>
-			<select name="id_med2" onChange="goToUrl2('<?php echo $_REQUEST['id_med2'] ?>','interacao.php?pag=interacao', '<?php echo $id_med1 ?>')">
-				<option value=""> ..:: selecione ::.. </option>
-				<?php
-				if (@$_REQUEST['id_med2'] == "") $medicamento2_combo = @$_POST['id_med2'];
-				else $medicamento2_combo = @$_REQUEST['id_med2'];
-
-				while ($row = mysqli_fetch_assoc($result)) {
-				?>
-					<option value="<?php echo $row['id_med2']; ?>" 
-					<?php echo $row['id_med2'] == $medicamento2_combo ? "selected" : "" ?>>
-					<?php echo $row['nome_med']; ?></option>
-				<?php
-				@$id_med2 = $_REQUEST['id_med2'];
-				}
-				?>
-			</select>
-
-			<br><br><br>
+						while ($row = mysqli_fetch_assoc($result)) {
+						?>
+							<option value="<?php echo $row['id_med']; ?>" <?php echo $row['id_med'] == $medicamento1_combo ? "selected" : "" ?>><?php echo $row['nome_med']; ?></option>
+						<?php
+						}
+						?>
+					</select>
 
 
-	</main>
-	<br><br><br><br><br><br>
+					<!-- Combo 1 -->
+
+					<?php
+
+					@$id_med1 = $_GET['id_med'];
+
+					$query = "
+				SELECT *
+				FROM interacao
+				INNER JOIN medicamento ON interacao.id_med2 = medicamento.id_med
+				WHERE id_med1 = '$id_med1' AND medicamento.ativo = 1
+				ORDER BY nome_med
+			";
+
+					//echo "$query";
+					$result = mysqli_query($con, $query);
+
+					?>
+
+					<br><br>
+
+					<label for="categoria"><strong>Medicamento 2</strong></label>
+					<select name="id_med2">
+						<option value=""> ..:: selecione ::.. </option>
+						<?php
+						if (@$_REQUEST['id_med2'] == "") $medicamento2_combo = @$_POST['id_med2'];
+						else $medicamento2_combo = @$_REQUEST['id_med2'];
+
+						while ($row = mysqli_fetch_assoc($result)) {
+						?>
+							<option value="<?php echo $row['id_med2']; ?>" <?php echo $row['id_med2'] == $medicamento2_combo ? "selected" : "" ?>>
+								<?php echo $row['nome_med']; ?></option>
+						<?php
+							@$id_med2 = $_REQUEST['id_med2'];
+						}
+						?>
+					</select>
+					<input type="submit" value="Selecionar">
+			</form>
+		</div>
+		<br><br><br>
 
 
-	<!-- ************************** TESTES DE FUNCIONALIDADEEEEE *************************** -->
+		<br><br><br><br><br><br>
 
 
-	<h2>TESTES DE USABILIDADE</h2>
+		<!-- ************************** TESTES DE FUNCIONALIDADEEEEE *************************** -->
 
-	<main>
-		<div class="campo">
-			<div>
 
-				
-					<table>
-						<thead>
-							<tr>
-								<th>Medicamento 1</th>
-							</tr>
-						</thead>
-						<tbody>
+		<h2>TESTES DE USABILIDADE</h2>
 
-							<?php
+		<div class="container-itens">
 
-							$query = "
+			<form action="busca.php" method="GET">
+				<label>Nome do medicamento</label>
+				<input type="text" name="nome_med" size="30px" placeholder="Insira o nome do medicamento">
+				<button>Buscar</button>
+			</form>
+
+			<form action="interacao.php?" method="GET">
+				<table id="tableMed1">
+					<thead>
+						<tr>
+							<th>Medicamento 1</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<?php
+
+						$query = "
 								SELECT id_med, nome_med
 								FROM medicamento
 								WHERE ativo = 1
 							";
-							$result = mysqli_query($con, $query);
+						$result = mysqli_query($con, $query);
 
-							if (@$_REQUEST['id_med'] == "") $medicamento1_combo = @$_GET['id_med'];
-							else $medicamento1_combo = @$_REQUEST['id_med'];
+						if (@$_REQUEST['id_med'] == "") $medicamento1_combo = @$_GET['id_med'];
+						else $medicamento1_combo = @$_REQUEST['id_med'];
 
-							while ($row = mysqli_fetch_assoc($result)) 
-							{ ?>
-								<tr>
-									<th>
-										<input class="nome_medicamento" type="submit" onclick="goToUrl(<?php echo $row['id_med']; ?>,'interacao.php?pag=interacao')" value="<?php echo $row['nome_med']; ?>">
-									</th>
-								</tr>
-
-							<?php } ?>
-
-						</tbody>
-					</table>
-
-
-				<br><br><br>
-				<div class="table100">
-					<table>
-						<thead>
+						while ($row = mysqli_fetch_assoc($result)) { ?>
 							<tr>
-								<th>Medicamento 2</th>
+								<th>
+									<button class="nome_medicamento" type="submit" onClick="top.location.href='interacao.php&id_med1='<?php $row['id_med']; ?>" value="<?php echo $row['id_med']; ?>"><?php echo $row['nome_med']; ?></button>
+								</th>
 							</tr>
-						</thead>
-						<tbody>
+
+
+						<?php } ?>
+
+					</tbody>
+				</table>
+			</form>
+		</div>
+
+		<br><br><br>
+
+		<div class="container-itens">
+			<form action="busca.php" method="GET">
+				<label>Nome do medicamento</label>
+				<input type="text" name="nome_med" size="30px" placeholder="Insira o nome do medicamento">
+				<button>Buscar</button>
+			</form>
+
+			<div class="table100">
+				<table>
+					<thead>
+						<tr>
+							<th>Medicamento 2</th>
+						</tr>
+					</thead>
+					<tbody>
 
 						<?php
 
-							@$id_med1 = $_GET['id_med'];
+						@$id_med1 = $_GET['id_med'];
 
-							$query = "
+						$query = "
 								SELECT *
 								FROM interacao
 								INNER JOIN medicamento ON interacao.id_med2 = medicamento.id_med
@@ -174,37 +201,56 @@
 								ORDER BY medicamento.nome_med
 							";
 
-							//echo "$query";
-							$result = mysqli_query($con, $query);
-							if (@$_REQUEST['id_med2'] == "") $medicamento2_combo = @$_POST['id_med2'];
-								else $medicamento2_combo = @$_REQUEST['id_med2'];
+						//echo "$query";
+						$result = mysqli_query($con, $query);
+						if (@$_REQUEST['id_med2'] == "") $medicamento2_combo = @$_POST['id_med2'];
+						else $medicamento2_combo = @$_REQUEST['id_med2'];
 
-								while ($row = mysqli_fetch_assoc($result)) {
-								?>
-								<tr>
-									<th>
-										<input class="nome_medicamento" type="submit" value="<?php echo $row['nome_med']; ?>">
-									</th>
-								</tr>
+						while ($row = mysqli_fetch_assoc($result)) {
+						?>
+							<tr>
+								<th>
+									<input class="nome_medicamento" type="submit" value="<?php echo $row['nome_med']; ?>">
+								</th>
+							</tr>
 
-							<?php 
+						<?php
 							@$id_med2 = $_GET['id_med2'];
-							$interacao = $row['interacao'];
-						} 
-							
-							?>
+						}
 
-						</tbody>
-					</table>
-				</div>
+						?>
 
-<br><br><br>
+					</tbody>
+				</table>
+			</div>
+			</form>
+		</div>
 
-				<div>
-					<?php echo $id_med1; ?><br>
-					<?php echo $id_med2; ?><br>
-					<?php echo $interacao; ?>
-				</div>
+		<br><br><br>
+
+		<div>
+			<?php
+
+			$query = "
+						SELECT *
+						FROM interacao
+						INNER JOIN medicamento ON interacao.id_med2 = medicamento.id_med
+						WHERE id_med1 = '$id_med1' AND id_med2 = '$id_med2' AND medicamento.ativo = 1
+						ORDER BY medicamento.nome_med
+					";
+
+			//echo "$query";
+			$result = mysqli_query($con, $query);
+
+			while ($row = mysqli_fetch_assoc($result)) {
+
+				@$interacao = $row['interacao'];
+			}
+
+			?>
+
+			<label> Interação: </label> <?php echo $interacao; ?>
+		</div>
 
 
 	</main>

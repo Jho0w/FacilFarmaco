@@ -6,6 +6,7 @@
 body {
     font-family:sans-serif;
     font-size: 14px;
+    background-color: #FEFEFE;
 }
 
 .nome{
@@ -16,7 +17,7 @@ body {
 }
 
 .sair{
-    background-color: #a890f0;
+    background-color: #C6E7FF;
 }
 
 
@@ -52,7 +53,7 @@ header, #menu{
 }
 
 .menuu li a{
-    color: #59429d; 
+    color: #0078CE; 
     text-decoration: none;
     padding:5px 10px;
     display:block;

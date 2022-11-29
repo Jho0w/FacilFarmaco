@@ -35,12 +35,6 @@ if (@$_REQUEST['id_inter'] and @!$_REQUEST['botao'])
 
 if (@$_REQUEST['botao'] == "Gravar") 
 {
-	if ($_SESSION["usuarioNivel"] == "1"){ 
-	$anuncioAtivo = $_POST['anuncioAtivo'];
-	}
-	else{ 
-	$anuncioAtivo = 2; 
-	}
 	
 	if (@!$_REQUEST['id_inter'])
 	{
@@ -94,27 +88,20 @@ if (@$_REQUEST['botao'] == "Gravar")
 			<label><?php echo @$_POST['id_inter']; ?></label>
 		</div>
 		<fieldset class="grupo">
+			
 			<div class="campo">
-				<label for="composicao"><strong>Composição</strong></label>
-				<input class="campo-composicao" type="text" name="composicao" id="composicao" required value=<?php echo @$_POST['composicao'];?> >
-			</div>
-			<div class="campo">
-				<label for="interagente"><strong>Interagente</strong></label>
-                <input type=text name="interagente" value=<?php echo @$_POST['interagente']; ?> >
-			</div>
-			<div class="campo">
-				<label for="classe"><strong>Classe</strong></label>
-                <!-- Início da Combo de Classe -->
+				<label for="classe"><strong>Composição</strong></label>
+                <!-- Início da Combo de Composição -->
 				<?php
 				
 				$query = "
-					SELECT id_classe, nome
-					FROM classe
+					SELECT id_med, nome_med
+					FROM medicamento
 				";
 				$result = mysqli_query($con, $query);
 			?>
 
-			<select name="id_classe" required>
+			<select name="id_med1" required>
 			<option selected disabled value="">Selecione</option>
 			
 			<?php
@@ -122,8 +109,8 @@ if (@$_REQUEST['botao'] == "Gravar")
 			{	
 			?>
 			
-			<option value="<?php echo $row['id_classe']; ?>" 
-			<?php echo $row['id_classe'] == @$_POST['id_classe'] ? "selected" : "" ?>><?php echo @$row['nome'];?></option>
+			<option value="<?php echo $row['id_med']; ?>" 
+			<?php echo $row['id_med'] == @$_POST['id_med'] ? "selected" : "" ?>><?php echo @$row['nome_med'];?></option>
 
 			</option>
 			
@@ -132,7 +119,39 @@ if (@$_REQUEST['botao'] == "Gravar")
 			?>
 			</select>
 			</div>
-            <!-- Fim da Combo de Classe -->
+
+			<div class="campo">
+				<label for="classe"><strong>Interagente</strong></label>
+            <!-- Inicio da Combo de Interagente -->
+
+
+							<?php
+				
+				$query = "
+					SELECT id_med, nome_med
+					FROM medicamento
+				";
+				$result = mysqli_query($con, $query);
+			?>
+
+			<select name="id_med2" required>
+			<option selected disabled value="">Selecione</option>
+			
+			<?php
+			while( $row = mysqli_fetch_assoc($result) )
+			{	
+			?>
+			
+			<option value="<?php echo $row['id_med']; ?>" 
+			<?php echo $row['id_med'] == @$_POST['id_med'] ? "selected" : "" ?>><?php echo @$row['nome_med'];?></option>
+
+			</option>
+			
+			<?php
+				}
+			?>
+			</select>
+			</div>
 		</fieldset>	
 		<div class="campo">
 			<label for="interacao"><strong>Interação</strong></label>

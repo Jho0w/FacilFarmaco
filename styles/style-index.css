@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+main{
+    margin-left: 10%;
+    margin-top: 3%;
+    
+}
+
+#titulo{
+    height: 300px;
+}

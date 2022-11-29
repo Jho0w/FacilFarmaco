@@ -39,7 +39,7 @@ if (@$_REQUEST['botao'] == "Gravar")
 	
 	if (@!$_REQUEST['id_classe'])
 	{
-		$insere = "INSERT INTO classe (nome, funcao, quando, como, ativo) VALUES ('{$_POST['nome']}', '{$_POST['funcao']}', '{$_POST['quando']}', '{$_POST['como']}', '1')";
+		$insere = "INSERT INTO classe (nome, funcao, quando, como, ativo) VALUES ('{$_POST['nome_classe']}', '{$_POST['funcao']}', '{$_POST['quando']}', '{$_POST['como']}', '1')";
 		$result_insere = mysqli_query($con, $insere);
 		
 		if ($result_insere) echo "<h2> Registro inserido com sucesso!!!</h2>";
