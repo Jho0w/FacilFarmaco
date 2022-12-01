@@ -101,12 +101,12 @@ if (@$_REQUEST['botao'] == "Gravar")
 			</div>
 			<div class="campo">
 				<label for="quando"><strong>Quando</strong></label>
-				<input type=text name="quando" value=<?php echo @$_POST['quando']; ?> >
+				<textarea name="quando" value=<?php echo @$_POST['quando']; ?> ></textarea>
 			</div>
 		</fieldset>	
 		<div class="campo">
 			<label for="como"><strong>Como</strong></label>
-			<input type=text name="como" value=<?php echo @$_POST['como']; ?> >
+			<textarea name="como" value=<?php echo @$_POST['como']; ?> ></textarea>
 		</div>
 
 			<button class="botao1" type="submit" name="botao" value="Gravar">Concluido</button>

@@ -21,13 +21,15 @@
 ?>
 
 	<main>
-		<br><br><br><br><br><br>
+		
 		<div>
-			<h2 id="titulo">Texto explicando para tomar os cuidados, que apenas para conferência, precisa de indicação profissional, etc</h2>
+			<h2 id="titulo"><p>O uso incorreto e a inadequada prescrição de medicamentos podem causar sérios problemas de saúde.</p> <br><br>
+				<p>Esse site visa ajudar os profissionais prescritores de medicamentos a detectar possíveis interações medicamentosas</p> <br><br>
+				<p>Também ajudar a esclarecer os pacientes que usam medicamentos prescritos as usarem adequadamente</p> <br><br>
+				<p>Em caso de necessidade de medicamento, procure um profissional.</p>
+				</h2>
 		</div>
 
-		
-		<br><br><br><br><br><br>
 
     </main>
 

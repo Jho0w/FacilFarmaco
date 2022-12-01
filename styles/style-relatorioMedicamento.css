@@ -9,10 +9,10 @@
 }
 
 body{
-    background-color: #F0F8FF;
+    background-color: #FEFEFE;
     font-family: sans-serif;
     font-size: 1.2em;
-    color: #59429d;
+    color: #0078CE;
     justify-content: center;
 }
 
@@ -26,13 +26,13 @@ main{
 button {
     font-family: sans-serif;
     font-size: 1em;
-    color: #59429d;
+    color: #0078CE;
     border-radius: 5px;
 }
 
 #botaoExcel {
     font-size: 1.2em;
-    background: #59429d;
+    background: #0078CE;
     border: 0;
     margin-bottom: 1em;
     color: #ffffff;
@@ -55,12 +55,13 @@ button {
 #meio{
     font-size: 1.7em;
     font-family: sans-serif;
-    color:#59429d;
+    color:#0078CE;
 }
-
 .table100 {
     margin-top: 12px;
     margin-bottom: 24px;
+    margin-left: 15%;
+    width: 80%;
 }
 
 table {
@@ -69,8 +70,7 @@ table {
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
-    width: 500px;
-    position: relative;
+    width: 80%;
 }
 
 table * {
@@ -92,5 +92,5 @@ table tr:hover {
 
 #excel{
     font-family: sans-serif;
-    color:#59429d;
+    color:#0078CE;
 }

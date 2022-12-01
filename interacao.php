@@ -222,12 +222,12 @@
 				$id_med1 = "Selecione um medicamento";
 				$id_med2 = "Selecione um medicamento";
 				$interacao = "Selecione um medicamento";
-			} else if($id_med2 == null){
+			} else if(@$id_med2 == null){
 				$id_med2 = "Selecione um medicamento";
 				$interacao = "Selecione o segundo medicamento";
 			}
 			?>
-			
+
 			<div id="interacao-box">
 				<div id="interacao-container">
 					<div id="classe-med1">

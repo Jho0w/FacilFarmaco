@@ -68,7 +68,7 @@ if (@$_REQUEST['botao'] == "Gravar")
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="styles/style-cadMedicamento.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="styles/style-cadInteracoes.css" media="screen">
 	
 	<title>Cadastro de Interações</title>
 </head>
@@ -96,7 +96,7 @@ if (@$_REQUEST['botao'] == "Gravar")
 				
 				$query = "
 					SELECT id_med, nome_med
-					FROM medicamento
+					FROM medicamento WHERE ativo = 1
 				";
 				$result = mysqli_query($con, $query);
 			?>
@@ -129,7 +129,7 @@ if (@$_REQUEST['botao'] == "Gravar")
 				
 				$query = "
 					SELECT id_med, nome_med
-					FROM medicamento
+					FROM medicamento WHERE ativo = 1
 				";
 				$result = mysqli_query($con, $query);
 			?>

@@ -100,6 +100,7 @@ if (@$_REQUEST['botao'] == "Gravar")
 				$query = "
 					SELECT id_classe, nome_classe
 					FROM classe
+					WHERE ativo = 1
 				";
 				$result = mysqli_query($con, $query);
 			?>

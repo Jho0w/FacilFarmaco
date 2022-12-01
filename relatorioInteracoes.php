@@ -9,13 +9,6 @@ if ($_SESSION["usuarioNivel"] == "0") {
 }
 
 $idUser = @$_REQUEST['idUser'];
-
-
-if(@$_REQUEST['botaoExcel'] == "Exportar"){
-	
-	exportcsv();
-
-}
 ?>
 
 
@@ -25,7 +18,7 @@ if(@$_REQUEST['botaoExcel'] == "Exportar"){
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="styles/style-relatorioClasse.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="styles/style-relatorioInteracoes.css" media="screen">
 	<title>Relatório Interações</title>
 </head>
 <body>
@@ -55,8 +48,11 @@ if(@$_REQUEST['botaoExcel'] == "Exportar"){
 					<?php
 					@$interacoes = $_POST['id_inter'];
 
-					$query = "SELECT * FROM interacao 
-                    WHERE id_inter > 0 AND ativo = 1";
+					$query = "
+						SELECT * FROM interacao 
+						INNER JOIN medicamento ON interacao.id_med1 = medicamento.id_med
+						WHERE id_inter > 0 AND interacao.ativo = 1
+					";
 					
 					$result = mysqli_query($con, $query);
 
@@ -66,8 +62,8 @@ if(@$_REQUEST['botaoExcel'] == "Exportar"){
 					?>
 					<tr>
 						<th><?php echo $coluna['id_inter'];?> </th>
-						<th><?php echo $coluna['id_med1'];?> </th>
-						<th><?php echo $coluna['id_med2'];?> </th>
+						<th><?php echo $coluna['nome_med'];?> </th>
+						<th><?php echo $coluna['nome_med'];?> </th>
 						<th><?php echo $coluna['interacao'];?> </th>
 						<th>
 					<a href="cadInteracoes.php?id_inter=<?php echo $coluna['id_inter']; ?>" >
@@ -82,16 +78,6 @@ if(@$_REQUEST['botaoExcel'] == "Exportar"){
 			</table>
 		</div>
 
-			<div>
-				<h1 id="excel">Importar para excel!</h1>
-			</div>
-		
-
-			<div>
-				<form action=# method=post>
-					<button type=submit id="botaoExcel" name="botaoExcel" value="Exportar">Exportar</button>
-				</form>
-			</div>
 	</main>
 
 	<?php include('rodape.html'); ?>

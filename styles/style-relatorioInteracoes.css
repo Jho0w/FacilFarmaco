@@ -62,6 +62,7 @@ button {
     margin-top: 12px;
     margin-bottom: 24px;
     margin-left: 15%;
+    width: 80%;
 }
 
 table {
@@ -73,9 +74,6 @@ table {
     width: 80%;
 }
 
-table * {
-    position: relative;
-}
 
 table thead tr {
     height: 35px;
