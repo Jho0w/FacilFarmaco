@@ -39,7 +39,7 @@ if (@$_REQUEST['botao'] == "Gravar")
 	
 	if (@!$_REQUEST['id_classe'])
 	{
-		$insere = "INSERT INTO classe (nome, funcao, quando, como, ativo) VALUES ('{$_POST['nome_classe']}', '{$_POST['funcao']}', '{$_POST['quando']}', '{$_POST['como']}', '1')";
+		$insere = "INSERT INTO classe (nome_classe, funcao, quando, como, ativo) VALUES ('{$_POST['nome_classe']}', '{$_POST['funcao']}', '{$_POST['quando']}', '{$_POST['como']}', '1')";
 		$result_insere = mysqli_query($con, $insere);
 		
 		if ($result_insere) echo "<h2> Registro inserido com sucesso!!!</h2>";
@@ -48,7 +48,7 @@ if (@$_REQUEST['botao'] == "Gravar")
 	} else 	
 	{
 		$insere = "UPDATE classe SET 
-					nome = '{$_POST['nome_classe']}'
+					nome_classe = '{$_POST['nome_classe']}'
 					, funcao = '{$_POST['funcao']}'
 					, quando = '{$_POST['quando']}'
 					, como = '{$_POST['como']}'
@@ -92,8 +92,8 @@ if (@$_REQUEST['botao'] == "Gravar")
 		</div>
 		<fieldset class="grupo">
 			<div class="campo">
-				<label for="nome"><strong>Nome</strong></label>
-				<input class="campo-nome" type="text" name="nome" id="nome" required value=<?php echo @$_POST['nome_classe'];?> >
+				<label for="nome_classe"><strong>Nome</strong></label>
+				<input class="campo-nome" type="text" name="nome_classe" id="nome_classe" required value=<?php echo @$_POST['nome_classe'];?> >
 			</div>
 			<div class="campo">
 				<label for="funcao"><strong>Função</strong></label>
